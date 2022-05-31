@@ -1,4 +1,4 @@
-# This graph is when there is overloading
+# This graph is for the stress test
 import numpy as np
 import string
 import os
