@@ -1,0 +1,21 @@
+# This graph is when there is overloading
+import numpy as np
+import string
+import os
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+#df2 = pd.DataFrame(columns=['Test Label', 'Percentage of packets received (%)'])
+
+d = {'Test Label': ['Same Desk (2.2 ft)', 'Same table (further away) (4.9 ft)'], 'Percentage of packets received (%)': [63, 17]}
+df = pd.DataFrame(data=d)
+df
+
+groupedvalues = df.groupby('Test Label').sum().reset_index()
+
+# use sns barplot to plot bar plot between days and tip value
+ax = sns.barplot(x='Percentage of packets received (%)', y='Test Label', data=groupedvalues, errwidth=0)
+
+# now simply assign the bar values to each bar by passing containers method to bar_label function
+ax.bar_label(ax.containers[0])
