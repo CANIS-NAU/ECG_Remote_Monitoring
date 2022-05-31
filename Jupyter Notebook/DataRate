@@ -1,0 +1,213 @@
+import numpy as np
+import string
+import os
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+sns.set_theme(style="ticks", color_codes=True)
+
+totalSizeCoapMessage = 42
+
+
+# Same Desk (Test1)
+list1 = []
+
+myfile = open("Test1.txt", "r")
+
+for x in myfile:
+    if(x!='\n'):
+        list1.append(x)
+              
+myfile.close()
+
+list1 = [x[:-1] for x in list1]
+
+
+for i in range(0, len(list1)):
+    list1[i] = totalSizeCoapMessage/float(list1[i])
+
+
+
+# Same desk with distance (Test2)
+list2 = []
+
+myfile = open("Test2.txt", "r")
+
+for x in myfile:
+    if(x!='\n'):
+        list2.append(x)
+              
+myfile.close()
+
+list2 = [x[:-1] for x in list2]
+
+for i in range(0, len(list2)):
+    list2[i] = totalSizeCoapMessage/float(list2[i])
+    
+    
+# Same Floor with line of sight (Test3)
+list3 = []
+
+myfile = open("Test3.txt", "r")
+
+for x in myfile:
+    if(x!='\n'):
+        list3.append(x)
+              
+myfile.close()
+
+list3 = [x[:-1] for x in list3]
+
+for i in range(0, len(list3)):
+    list3[i] = totalSizeCoapMessage/float(list3[i])
+
+
+# Same Floor without line of sight (Test4) 
+list4 = []
+
+myfile = open("Test4.txt", "r")
+
+for x in myfile:
+    if(x!='\n'):
+        list4.append(x)
+              
+myfile.close()
+
+list4 = [x[:-1] for x in list4]
+
+for i in range(0, len(list4)):
+    list4[i] = totalSizeCoapMessage/float(list4[i])
+    
+    
+# Same Floor but not same room (Test5) 
+list5 = []
+
+myfile = open("Test5.txt", "r")
+
+for x in myfile:
+    if(x!='\n'):
+        list5.append(x)
+              
+myfile.close()
+
+list5 = [x[:-1] for x in list5]
+
+for i in range(0, len(list5)):
+    list5[i] = totalSizeCoapMessage/float(list5[i])
+    
+    
+# One floor difference between the LoRa boards (Test6) 
+list6 = []
+
+myfile = open("Test6.txt", "r")
+
+for x in myfile:
+    if(x!='\n'):
+        list6.append(x)
+              
+myfile.close()
+
+list6 = [x[:-1] for x in list6]
+
+for i in range(0, len(list6)):
+    list6[i] = totalSizeCoapMessage/float(list6[i])
+    
+    
+# Two floors of difference between the LoRa boards (Test7) 
+list7 = []
+
+myfile = open("Test7.txt", "r")
+
+for x in myfile:
+    if(x!='\n'):
+        list7.append(x)
+              
+myfile.close()
+
+list7 = [x[:-1] for x in list7]
+
+for i in range(0, len(list7)):
+    list7[i] = totalSizeCoapMessage/float(list7[i])
+
+
+
+df2 = pd.DataFrame(columns=['Data Rate', 'Test Label'])
+#print(df2)
+
+
+for i in list1:
+    df2.loc[-1] = [i,'Same Desk']
+    df2.index = df2.index + 1
+    df2 = df2.sort_index()
+        
+print(df2)
+print("")
+print("")
+
+
+for i in list2:
+    df2.loc[-1] = [i,'Same Desk (more distance)']
+    df2.index = df2.index + 1
+    df2 = df2.sort_index()
+        
+print(df2)
+print("")
+print("")
+
+
+for i in list3:
+    df2.loc[-1] = [i,'Same floor with line of sight']
+    df2.index = df2.index + 1
+    df2 = df2.sort_index()
+        
+print(df2)
+print("")
+print("")
+
+
+for i in list4:
+    df2.loc[-1] = [i,'Same floor without line of sight']
+    df2.index = df2.index + 1
+    df2 = df2.sort_index()
+        
+print(df2)
+print("")
+print("")
+
+
+for i in list5:
+    df2.loc[-1] = [i,'Same floor, not same room']
+    df2.index = df2.index + 1
+    df2 = df2.sort_index()
+        
+print(df2)
+print("")
+print("")
+
+
+for i in list6:
+    df2.loc[-1] = [i,'One floor difference']
+    df2.index = df2.index + 1
+    df2 = df2.sort_index()
+        
+print(df2)
+print("")
+print("")
+
+
+for i in list7:
+    df2.loc[-1] = [i,'Two floors difference']
+    df2.index = df2.index + 1
+    df2 = df2.sort_index()
+        
+print(df2)
+print("")
+print("")
+
+
+sns.set_theme(style="whitegrid")
+ax=sns.boxplot(x="Data Rate", y="Test Label", data=df2)
+#plt.title('Data Rate')
+plt.xlabel('Data Rate (B/s)')
+plt.show()
